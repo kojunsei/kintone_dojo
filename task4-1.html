@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dojo課題</title>
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+}
+header {
+  background-color: #1aaedb;
+  border-bottom: #ead963 6px solid;
+}
+.container {
+  padding: 16px;
+  padding-left: 120px;
+}
+header h1,
+header h2 {
+  margin: 0;
+  color: #fff;
+  line-height: 1;
+}
+header h1 {
+  padding: 30px 0 5px 0;
+  font-size: 24px;
+  border-bottom: 1px dotted #fff;
+  font-weight: 500;
+}
+header h2 {
+  padding: 6px 0 0 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>kintone dojo</h1>
+    <h2>JavaScript課題③</h2>
+  </div>
+</header>
+<main class="container">
+  <h1>kintone のライセンス料</h1>
+  <div class="user">最低ユーザー数(ライトコース)での利用料金</div><br/>
+  <input type="checkbox" class="chk" value="250"/>セキュアオプション（1ユーザー あたり 250円）<br/>
+  <input type="checkbox" class="chk" value="1000"/>ディスク増設（10GB あたり 1000円）<br/>
+  <h3>月額金額：<span id="price">3900</span>円</h3>
+</main>
+<script>
+// ここに処理を記載する
+
+// checkboxを指定する
+const checks = document.getElementsByClassName('chk');
+// 3900を取得、後ほど金額に返す
+const price = Number(document.getElementById('price').textContent);
+// 金額を計算
+let number = Number(price);
+
+// 1つ目のチェックボックスの場合
+document.getElementsByClassName('chk')[0].onclick = () => {
+  if (checks[0].checked && checks[1].checked) {
+    number = price + Number(checks[0].value) * 5 + Number(checks[1].value);
+  } else if (!checks[0].checked && !checks[1].checked) {
+    number = 3900;
+  } else if (checks[0].checked && !checks[1].checked) {
+    number = price + Number(checks[0].value) * 5;
+  } else if (!checks[0].checked && checks[1].checked) {
+    number = price + Number(checks[1].value);
+  } document.getElementById('price').textContent = number;
+};
+document.getElementsByClassName('chk')[1].onclick = () => {
+  if (checks[0].checked && checks[1].checked) {
+    number = price + Number(checks[0].value) * 5 + Number(checks[1].value);
+  } else if (!checks[0].checked && !checks[1].checked) {
+    number = 3900;
+  } else if (checks[0].checked && !checks[1].checked) {
+    number = price + Number(checks[0].value) * 5;
+  } else if (!checks[0].checked && checks[1].checked) {
+    number = price + Number(checks[1].value);
+  }document.getElementById('price').textContent = number;
+};
+
+
+//回る、もしcheckboxチェックあれば、金額を足していく
+  //   for ( i = 0; i < checks.length; i++) {
+  //       if ( checks[i].checked === true ) {
+  //           number += Number(checks[i].value);
+  //           console.log(number)
+  //       }
+  //       else (checks[i].checked === false)
+  //       {
+  //           number = ;
+  //           console.log(number)
+  //       }
+  //   }
+
+
+</script>
+</body>
+</html>

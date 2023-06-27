@@ -115,8 +115,6 @@ const fileManage = {
   }
 };
 
-
-
 //課題1
 console.log(Object.keys(fileManage));
 Object.keys(fileManage).forEach((val,index) => {
@@ -126,33 +124,24 @@ Object.keys(fileManage).forEach((val,index) => {
 //課題2
 Object.keys(fileManage).forEach((val,index) => {
   //console.log(val);
-  Object.keys(fileManage[val]).forEach((a,index) => {
-    const nakami = fileManage[val][a];
-    document.getElementById(val + '-' + a).textContent=nakami;
+  Object.keys(fileManage[val]).forEach((num,index) => {
+    const content = fileManage[val][num];
+    document.getElementById(val + '-' + num).textContent = content;
 })});
 
 //課題3
-
 const list =document.getElementById('list');
-
-
 Object.keys(fileManage).forEach((val,index) => {
   //console.log(val);
   Object.keys(fileManage[val]).forEach((a,index) => {
     if(fileManage[val][a] === 'Everyone')
     {
-      // console.log(document.getElementById(val + '-' + 'folderName').textContent);
-      // const folder = document.createTextNode((val + '-' + 'folderName').textContent);
-      // list.appendChild(folder);
-      //kakikomi.innerText += document.getElementById(val + '-' + 'folderName').textContent +' ';
       const folderName = fileManage[val].folderName;
-      const lisuto = document.createElement('li');
-      lisuto.textContent = folderName;
-      list.appendChild(lisuto);
+      const list_item = document.createElement('li');
+      list_item.textContent = folderName;
+      list.appendChild(list_item);
     }
 })});
-
-  // ここに処理を記載する
 
 </script>
 </body>

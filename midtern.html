@@ -5,38 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./midtern.css">
 <title>dojo課題</title>
-
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-  header {
-    background-color: #1aaedb;
-    border-bottom: #ead963 6px solid;
-  }
-  .container {
-    padding: 16px;
-    padding-left: 120px;
-  }
-  header h1,
-  header h2 {
-    margin: 0;
-    color: #fff;
-    line-height: 1;
-  }
-  header h1 {
-    padding: 30px 0 5px 0;
-    font-size: 24px;
-    border-bottom: 1px dotted #fff;
-    font-weight: 500;
-  }
-  header h2 {
-    padding: 6px 0 0 0;
-    font-size: 14px;
-    font-weight: 400;
-  }
-</style>
 </head>
 <body>
 <header>
@@ -69,45 +37,39 @@ axios.get('https://54o76ppvn8.execute-api.ap-northeast-1.amazonaws.com/prod/bb-d
   const dojo = resp.data;
   const table = document.getElementById('table');
 
-  console.log(dojo);
+
   // 増減できる表の一覧形式
   Object.keys(dojo).forEach((val) => {
-    console.log(val);
-    const cell_day = dojo[val].day.value;
     const cell_category = dojo[val].category.value;
-    const cell_content = dojo[val].content.value;
-    console.log(cell_day);
-
     const row = table.insertRow();
+    const row_day = row.insertCell(0);
+    row_day.textContent = dojo[val].day.value;
+    const row_category = row.insertCell(1);
+    row_category.textContent =  dojo[val].category.value;
 
-    const cell1 = row.insertCell(0);
-    cell1.textContent = cell_day;
-    const cell2 = row.insertCell(1);
-    cell2.textContent = cell_category;
-    console.log(cell_category);
     // カテゴリーごとに色分け
     if (cell_category === '企業情報') {
-      cell2.classList.add('cell');
+      row_category.classList.add('cell');
     } else if (cell_category === 'IR 情報') {
-      cell2.classList.add('cell_IR');
+      row_category.classList.add('cell_IR');
     } else if (cell_category === '製品') {
-      cell2.classList.add('cell_pro');
+      row_category.classList.add('cell_pro');
     }
-    const cell3 = row.insertCell(2);
-    cell3.textContent = cell_content;
+    const row_content = row.insertCell(2);
+    row_content.textContent = dojo[val].content.value;
 
     // リンク先のURLに遷移
     const cell_target = dojo[val].target.value;
     const link = dojo[val].url.value;
-    cell3.setAttribute('href', link);
-    cell3.setAttribute('target', cell_target);
-    cell3.addEventListener('click', function() {
+    row_content.setAttribute('href', link);
+    row_content.setAttribute('target', cell_target);
+    row_content.onclick= function() {
       if (cell_target === '_blank') {
         window.open(link, '_blank');
       } else if (cell_target === '_self') {
         window.location.href = link;
       }
-    });
+    };
   });
 }
 

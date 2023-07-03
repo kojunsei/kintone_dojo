@@ -79,32 +79,32 @@ let number2 = Number(price);
 const select = document.getElementsByClassName('slct');
 const select1 = select[0];
 const select2 = select[1];
+let securePrice_1 = 0;
+let securePrice_2 = 0;
 
-document.getElementsByClassName('chk')[0].onclick = () => {
-  if (checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[0].value) * Number(select1.value) + Number(checks[1].value) * Number(select2.value);
-  } else if (!checks[0].checked && !checks[1].checked) {
-    number = 3900;
-  } else if (checks[0].checked && !checks[1].checked ) {
-    number = price + Number(checks[0].value) * Number(select1.value);
-  } else if (checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[1].value) * Number(select2.value);
-  }
-};
+// 変更した部分
+const onclick_handler = () => {
+  if (checks[0].checked) {
+    securePrice_1 = Number(checks[0].value) * Number(select1.value);
+    number = price + securePrice_2 + securePrice_1 ;
+    console.log(`securePrice1: ${securePrice_1}, securePrice2: ${securePrice_2}`)
+  } else  {
+    securePrice_1 = 0;
+    number = price+ securePrice_1 + securePrice_2;
+  } 
 
-document.getElementsByClassName('chk')[1].onclick = () =>  {
-　if (checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[0].value) * Number(select1.value) + Number(checks[1].value) * Number(select2.value);
-  } else if (!checks[0].checked && !checks[1].checked) {
-    number = 3900;
-  } else if (checks[0].checked && !checks[1].checked) {
-    number = price + Number(checks[0].value) * Number(select1.value);
-  } else if (!checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[1].value) * Number(select2.value);
-  }
+  if (checks[1].checked) {
+    securePrice_2 = Number(checks[1].value) * Number(select2.value);
+    number = price + securePrice_2 + securePrice_1 ;
+  } else  {
+    securePrice_2 = 0;
+    number = price+ securePrice_2 + securePrice_1;
+  } 
 };
 
 document.getElementById('btn').onclick = () => {
+// 計算ボダンの中に代入する
+  onclick_handler();
   number2 = number;
   document.getElementById('price').textContent = number2;
 };

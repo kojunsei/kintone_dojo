@@ -60,44 +60,32 @@ const price = Number(document.getElementById('price').textContent);
 // 金額を計算
 let number = Number(price);
 
+// 変更した部分
+let securePrice_1 = 0;
+let securePrice_2 = 0;
+
 // 1つ目のチェックボックスの場合
-document.getElementsByClassName('chk')[0].onclick = () => {
-  if (checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[0].value) * 5 + Number(checks[1].value);
-  } else if (!checks[0].checked && !checks[1].checked) {
-    number = 3900;
-  } else if (checks[0].checked && !checks[1].checked) {
-    number = price + Number(checks[0].value) * 5;
-  } else if (!checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[1].value);
-  } document.getElementById('price').textContent = number;
+// 変更した部分
+checks[0].onclick = () => {
+  if (checks[0].checked) {
+    securePrice_1 = Number(checks[0].value) * 5;
+    number = price + securePrice_2+ securePrice_1 ;
+  } else  {
+    securePrice_1 = 0;
+    number = price+ securePrice_1 +securePrice_2;
+  } 
+  document.getElementById('price').textContent = number;
 };
-document.getElementsByClassName('chk')[1].onclick = () => {
-  if (checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[0].value) * 5 + Number(checks[1].value);
-  } else if (!checks[0].checked && !checks[1].checked) {
-    number = 3900;
-  } else if (checks[0].checked && !checks[1].checked) {
-    number = price + Number(checks[0].value) * 5;
-  } else if (!checks[0].checked && checks[1].checked) {
-    number = price + Number(checks[1].value);
-  }document.getElementById('price').textContent = number;
+checks[1].onclick = () => {
+  if (checks[1].checked) {
+    securePrice_2 = Number(checks[1].value);
+    number = price + securePrice_2+ securePrice_1 ;
+  } else  {
+    securePrice_2 = 0;
+    number = price+ securePrice_2+securePrice_1;
+  } 
+  document.getElementById('price').textContent = number;
 };
-
-
-//回る、もしcheckboxチェックあれば、金額を足していく
-  //   for ( i = 0; i < checks.length; i++) {
-  //       if ( checks[i].checked === true ) {
-  //           number += Number(checks[i].value);
-  //           console.log(number)
-  //       }
-  //       else (checks[i].checked === false)
-  //       {
-  //           number = ;
-  //           console.log(number)
-  //       }
-  //   }
-
 
 </script>
 </body>

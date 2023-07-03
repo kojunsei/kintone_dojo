@@ -37,6 +37,7 @@ header h2 {
   font-size: 14px;
   font-weight: 400;
 }
+/*枠線*/
 table, th, td {
   border-collapse: collapse;
   border:1px  solid #333;

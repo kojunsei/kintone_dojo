@@ -6,7 +6,7 @@
       const location = event.record.Table.value;
       const zero = event.record.Table.value[0];
       const body = {
-        'app': 18,
+        'app': kintone.app.getId(),
       };
   
       const space = [];

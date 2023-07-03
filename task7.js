@@ -12,7 +12,6 @@
     'app.record.edit.change.管理番号'];
 
   kintone.events.on(eventype, (event) => {
-    console.log(event);
     const data = event.record.日付.value;
     const product = event.record.サイボウズ製品.value;
     const num = event.record.管理番号.value;

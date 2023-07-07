@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dojo課題</title>
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+}
+header {
+  background-color: #1aaedb;
+  border-bottom: #ead963 6px solid;
+}
+.container {
+  padding: 16px;
+  padding-left: 120px;
+}
+header h1,
+header h2 {
+  margin: 0;
+  color: #fff;
+  line-height: 1;
+}
+header h1 {
+  padding: 30px 0 5px 0;
+  font-size: 24px;
+  border-bottom: 1px dotted #fff;
+  font-weight: 500;
+}
+header h2 {
+  padding: 6px 0 0 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>kintone dojo</h1>
+    <h2>JavaScript課題③</h2>
+  </div>
+</header>
+<main class="container">
+  <h1>kintone のライセンス料</h1>
+  <div class="user">最低ユーザー数(ライトコース)での利用料金</div>
+  <br/>
+  <input type="checkbox" class="chk" value="250"/>セキュアオプション（1ユーザー あたり 250円） ×
+  <select class="slct">
+    <option value="1">1名</option>
+    <option value="2">2名</option>
+    <option value="3">3名</option>
+    <option value="4">4名</option>
+    <option value="5">5名</option>
+  </select><br/>
+  <input type="checkbox" class="chk" value="1000"/>ディスク増設（10GB あたり 1000円） ×
+  <select class="slct">
+    <option value="1">10GB</option>
+    <option value="2">20GB</option>
+    <option value="3">30GB</option>
+    <option value="4">40GB</option>
+    <option value="5">50GB</option>
+  </select><br/>
+  <h3>月額金額：<span id="price">3900</span>円</h3>
+  <button id="btn">計算</button>
+</main>
+<script>
+//checkboxを指定する
+// checkboxを指定する
+const checks = document.getElementsByClassName('chk');
+
+// 3900を取得、後ほど金額に返す
+const price = Number(document.getElementById('price').textContent);
+// HTMLに返すための数字
+let number = Number(price);
+let number2 = Number(price);
+const select = document.getElementsByClassName('slct');
+const select1 = select[0];
+const select2 = select[1];
+let securePrice_1 = 0;
+let securePrice_2 = 0;
+
+// 変更した部分
+const onclick_handler = () => {
+  if (checks[0].checked) {
+    securePrice_1 = Number(checks[0].value) * Number(select1.value);
+    number = price + securePrice_2 + securePrice_1 ;
+    console.log(`securePrice1: ${securePrice_1}, securePrice2: ${securePrice_2}`)
+  } else  {
+    securePrice_1 = 0;
+    number = price+ securePrice_1 + securePrice_2;
+  } 
+
+  if (checks[1].checked) {
+    securePrice_2 = Number(checks[1].value) * Number(select2.value);
+    number = price + securePrice_2 + securePrice_1 ;
+  } else  {
+    securePrice_2 = 0;
+    number = price+ securePrice_2 + securePrice_1;
+  } 
+};
+
+document.getElementById('btn').onclick = () => {
+// 計算ボダンの中に代入する
+  onclick_handler();
+  number2 = number;
+  document.getElementById('price').textContent = number2;
+};
+</script>
+</body>
+</html>

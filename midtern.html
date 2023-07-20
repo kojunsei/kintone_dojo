@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./midtern.css">
+<title>dojo課題</title>
+</head>
+<body>
+<header>
+<header>
+  <div class="container">
+    <h1>kintone dojo</h1>
+    <h2>中間課題</h2>
+    <h3  id="title" >「⾃社のHPで、APIで取得したデータを元に、
+最新情報を表⽰するようなサイトを作りたい」</h3>
+
+  </div>
+</header>
+
+<!-- tableを変更しました -->
+<main class="container">
+  <table id="table">
+  </table>
+
+</main>
+<script src="https://js.cybozu.com/axios/v0.27.2/axios.min.js"></script>
+<script>
+'use strict';
+
+axios.get('https://54o76ppvn8.execute-api.ap-northeast-1.amazonaws.com/prod/bb-dojo', {
+  params: {
+    id: 'dojo'
+  }
+}).then((resp) => {
+// respからデータもらう
+  const dojo = resp.data;
+  const table = document.getElementById('table');
+
+
+  // 増減できる表の一覧形式
+  Object.keys(dojo).forEach((val) => {
+    const cell_category = dojo[val].category.value;
+    const row = table.insertRow();
+    const row_day = row.insertCell(0);
+    row_day.textContent = dojo[val].day.value;
+    const row_category = row.insertCell(1);
+    row_category.textContent =  dojo[val].category.value;
+
+    // カテゴリーごとに色分け
+    if (cell_category === '企業情報') {
+      row_category.classList.add('cell');
+    } else if (cell_category === 'IR 情報') {
+      row_category.classList.add('cell_IR');
+    } else if (cell_category === '製品') {
+      row_category.classList.add('cell_pro');
+    }
+    const row_content = row.insertCell(2);
+    row_content.textContent = dojo[val].content.value;
+
+    // リンク先のURLに遷移
+    const cell_target = dojo[val].target.value;
+    const link = dojo[val].url.value;
+    row_content.setAttribute('href', link);
+    row_content.setAttribute('target', cell_target);
+    row_content.onclick= function() {
+      if (cell_target === '_blank') {
+        window.open(link, '_blank');
+      } else if (cell_target === '_self') {
+        window.location.href = link;
+      }
+    };
+  });
+}
+
+).catch((err) => {
+  console.log(`ADRESS GET ERROR : ${err}`);
+});
+  
+
+</script>
+</body>
+</html>

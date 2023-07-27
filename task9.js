@@ -15,8 +15,7 @@
     }
 
     const body = {
-      app: kintone.app.record.getId(),
-      // id:kintone.app.record.getId(),
+      app: kintone.app.getId(),
       query: query,
     };
 
